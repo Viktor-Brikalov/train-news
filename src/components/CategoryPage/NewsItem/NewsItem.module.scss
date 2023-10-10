@@ -1,0 +1,18 @@
+.news_item__news_item {
+  margin: 20px 0;
+}
+
+.news_item__news_title {
+  margin-bottom: 10px;
+}
+
+.news_item__news_content {
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  margin: 20px 0 80px;
+}
