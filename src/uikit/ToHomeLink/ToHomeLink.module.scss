@@ -1,0 +1,10 @@
+$linkBackground: gray;
+$linkColor: black;
+
+.to_home__link {
+  padding: 5px 40px;
+  color: $linkColor;
+  cursor: pointer;
+  background: $linkBackground;
+  width: fit-content;
+}
