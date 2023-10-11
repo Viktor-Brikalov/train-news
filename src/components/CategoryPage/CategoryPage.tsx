@@ -1,15 +1,14 @@
 import { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import Link from 'next/link';
 
-import { useAppDispatch } from '@/store';
+import { useAppDispatch } from '@/store/hooks';
 import { categoriesSelector, getOneCategory } from '@/store/slices/categoriesSlice';
 
 import { StaticPageRouteEnum } from '@/utils/routes';
 
-import styles from './CategoryPage.module.scss';
 import NewsItem from './NewsItem/NewsItem';
+import styles from './CategoryPage.module.scss';
 
 const CategoryPage: FC = () => {
   const dispatch = useAppDispatch();

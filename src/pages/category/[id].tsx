@@ -1,18 +1,31 @@
-import { FC } from 'react';
-import dynamic from 'next/dynamic';
+import { GetServerSideProps, NextPage } from 'next/types';
 
-import Loader from '@/components/Loader/Loader'
+import { ICategory } from '@/utils/types/categories';
+import { categoriesApi } from '@/api/Categories/Categories';
+import CategoryPage from '@/components/CategoryPage/CategoryPage';
 
-const DynamicCategoryPage = dynamic(
-  () => import('@/components/CategoryPage/CategoryPage'),
-  {
-    loading: () => <Loader />,
-    ssr: false,
-  },
-);
+type Props = {
+  currentCategory: ICategory | null;
+};
+ 
+const Page: NextPage<Props> = () => {
+  return <CategoryPage />
+}
 
-const CategoryPage: FC = () => {
-  return <DynamicCategoryPage />;
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const id = Number(ctx.query.id);
+  try {
+    const res = await categoriesApi.getCategory({ id });
+    const category = res?.data
+    return { props: { currentCategory: category?.data } }
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      }
+    }
+  }
 };
 
-export default CategoryPage;
+export default Page;

@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useAppDispatch } from '@/store';
+import { useAppDispatch } from '@/store/hooks';
 import { getCategories, categoriesSelector } from '@/store/slices/categoriesSlice';
 
 import CategoriesItem from '../CategoriesItem/CategoriesItem';

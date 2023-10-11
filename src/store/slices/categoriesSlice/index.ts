@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { categoriesApi } from '@/api/Categories/Categories';
@@ -59,6 +59,9 @@ export const categoriesSlice = createSlice({
         clearCategoriesState: () => {
             return initialState;
         },
+        initCategorySlice: (state, { payload }: PayloadAction<InitialStateType>) => {
+            state = payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getCategories.fulfilled, (state, { payload }) => {
@@ -74,4 +77,4 @@ export const categoriesSlice = createSlice({
 
 export const categoriesSelector = (state: RootState) => state.categories;
 
-export const { clearCategoriesState } = categoriesSlice.actions;
+export const { clearCategoriesState, initCategorySlice } = categoriesSlice.actions;

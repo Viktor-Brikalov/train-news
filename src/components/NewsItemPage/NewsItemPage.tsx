@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import { useAppDispatch } from '@/store';
+import { useAppDispatch } from '@/store/hooks';
 import { getOneNews, newsSelector } from '@/store/slices/newsSlice';
 
 import styles from './NewsItemPage.module.scss';

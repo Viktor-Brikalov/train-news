@@ -1,18 +1,31 @@
-import { FC } from 'react'
-import dynamic from 'next/dynamic'
+import type { GetServerSideProps, NextPage } from 'next';
 
-import Loader from '@/components/Loader/Loader'
+import { ICategory } from '@/utils/types/categories';
+import { categoriesApi } from '@/api/Categories/Categories';
 
-const DynamicHomePage = dynamic(
-  () => import('../components/HomePage/HomePage'),
-  {
-    loading: () => <Loader />,
-    ssr: true,
-  },
-);
+import HomePage from '@/components/HomePage/HomePage';
 
-const Home: FC= () => {
-  return <DynamicHomePage />;
+type Props = {
+  categories: ICategory[];
+};
+ 
+const Page: NextPage<Props> = (props) => {
+  return <HomePage />
+}
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  try {
+    const res = await categoriesApi.getCategoriesList({});
+    const categories = res.data
+    return { props: { categories: categories?.data } }
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      }
+    }
+  }
 };
 
-export default Home;
+export default Page;

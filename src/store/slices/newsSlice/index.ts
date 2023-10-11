@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { newsApi } from '@/api/News/News';
@@ -55,8 +55,11 @@ export const newsSlice = createSlice({
     name: 'news',
     initialState,
     reducers: {
-        clearState: (state) => {
+        clearState: () => {
             return initialState;
+        },
+        initNewsSlice: (state, { payload }: PayloadAction<INews | null>) => {
+            state.currentNews = payload;
         },
     },
     extraReducers: (builder) => {
@@ -73,4 +76,4 @@ export const newsSlice = createSlice({
 
 export const newsSelector = (state: RootState) => state.news;
 
-export const { clearState } = newsSlice.actions;
+export const { clearState, initNewsSlice } = newsSlice.actions;

@@ -1,9 +1,8 @@
 import type { AppProps } from 'next/app';
-import { Provider } from 'react-redux';
 
-import store from '@/store';
 import '@/styles/globals.css';
 import Head from 'next/head';
+import StoreProvider from '@/providers/StoreProvider';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,9 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <Head>
       <title>Новости</title>
     </Head>
-    <Provider store={store}>
+    <StoreProvider initialState={pageProps}>
       <Component {...pageProps} />
-    </Provider>
+    </StoreProvider>
     </>
   )
 }
